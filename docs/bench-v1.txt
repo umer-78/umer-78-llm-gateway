@@ -1,0 +1,26 @@
+| Setup | Interactive availability | p50 | p95 | Batch completed | Spend |
+|---|---:|---:|---:|---:|---:|
+| direct | **74.4%** (893/1200) | 1.10 s | 7.25 s | 93.3% (224/240) | $1.70 |
+| client retries | **76.2%** (914/1200) | 1.13 s | 7.22 s | 94.6% (227/240) | $1.74 |
+| gateway | **90.1%** (1081/1200) | 1.10 s | 3.95 s | 100.0% (240/240) | $2.36 |
+
+Gateway breaker events:
+  t=  59.1s  gamma     closed -> open      p95 3.4s over the 3.0s budget
+  t=  74.1s  gamma       open -> half_open cooldown over
+  t=  75.1s  alpha     closed -> open      error rate 50% over 154 calls
+  t=  90.2s  alpha       open -> half_open cooldown over
+  t=  91.7s  alpha  half_open -> open      probe failed
+  t= 101.5s  gamma  half_open -> open      probe failed
+  t= 106.9s  alpha       open -> half_open cooldown over
+  t= 107.2s  alpha  half_open -> open      probe failed
+  t= 112.4s  beta      closed -> open      error rate 50% over 223 calls
+  t= 116.6s  gamma       open -> half_open cooldown over
+  t= 122.4s  alpha       open -> half_open cooldown over
+  t= 124.1s  gamma  half_open -> closed    3 probes succeeded
+  t= 124.7s  alpha  half_open -> closed    3 probes succeeded
+  t= 127.4s  beta        open -> half_open cooldown over
+  t= 156.4s  beta   half_open -> closed    3 probes succeeded
+
+alpha outage at 60 s: opened after 15.1 s; closed 4.7 s after it recovered at 120 s
+alpha slow from 150 s: opened after None s
+hedged interactive requests: 300; spend on cancelled hedge legs $0.57 of $2.36

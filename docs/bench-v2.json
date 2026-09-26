@@ -1,0 +1,403 @@
+[
+  {
+    "strategy": "direct",
+    "interactive": {
+      "requests": 1200,
+      "succeeded": 893,
+      "availability": 0.7441666666666666,
+      "p50_s": 1.1066885000000184,
+      "p95_s": 7.245498119998956,
+      "hedged": 0
+    },
+    "batch": {
+      "requests": 240,
+      "completed": 224,
+      "completion": 0.9333333333333333,
+      "queued": 0,
+      "queued_median_wait_s": null
+    },
+    "cost_usd": {
+      "total": 1.7021132000000034,
+      "hedge_losers": 0,
+      "by_tenant": {
+        "acme": 1.2065154000000007,
+        "globex": 0.4955978000000001
+      },
+      "by_feature": {
+        "chat": 0.8667569999999988,
+        "search": 0.8151750000000003,
+        "summarize": 0.020181199999999996
+      }
+    },
+    "success_by_5s": {
+      "0": 1.0,
+      "5": 1.0,
+      "10": 0.92,
+      "15": 1.0,
+      "20": 1.0,
+      "25": 1.0,
+      "30": 1.0,
+      "35": 1.0,
+      "40": 0.96,
+      "45": 0.96,
+      "50": 1.0,
+      "55": 1.0,
+      "60": 0.0,
+      "65": 0.0,
+      "70": 0.0,
+      "75": 0.0,
+      "80": 0.0,
+      "85": 0.0,
+      "90": 0.0,
+      "95": 0.0,
+      "100": 0.0,
+      "105": 0.0,
+      "110": 0.0,
+      "115": 0.0,
+      "120": 1.0,
+      "125": 1.0,
+      "130": 1.0,
+      "135": 0.96,
+      "140": 1.0,
+      "145": 1.0,
+      "150": 1.0,
+      "155": 1.0,
+      "160": 1.0,
+      "165": 1.0,
+      "170": 1.0,
+      "175": 1.0,
+      "180": 1.0,
+      "185": 1.0,
+      "190": 1.0,
+      "195": 1.0,
+      "200": 0.96,
+      "205": 1.0,
+      "210": 1.0,
+      "215": 1.0,
+      "220": 0.96,
+      "225": 1.0,
+      "230": 1.0,
+      "235": 1.0
+    },
+    "breaker_events": []
+  },
+  {
+    "strategy": "client retries",
+    "interactive": {
+      "requests": 1200,
+      "succeeded": 913,
+      "availability": 0.7608333333333334,
+      "p50_s": 1.1330123039988393,
+      "p95_s": 7.240272447997995,
+      "hedged": 0
+    },
+    "batch": {
+      "requests": 240,
+      "completed": 227,
+      "completion": 0.9458333333333333,
+      "queued": 0,
+      "queued_median_wait_s": null
+    },
+    "cost_usd": {
+      "total": 1.7402308000000035,
+      "hedge_losers": 0,
+      "by_tenant": {
+        "acme": 1.2316256000000008,
+        "globex": 0.5086052000000001
+      },
+      "by_feature": {
+        "chat": 0.8854979999999988,
+        "search": 0.834303,
+        "summarize": 0.02042979999999999
+      }
+    },
+    "success_by_5s": {
+      "0": 1.0,
+      "5": 1.0,
+      "10": 1.0,
+      "15": 1.0,
+      "20": 1.0,
+      "25": 1.0,
+      "30": 1.0,
+      "35": 1.0,
+      "40": 1.0,
+      "45": 1.0,
+      "50": 1.0,
+      "55": 1.0,
+      "60": 0.0,
+      "65": 0.0,
+      "70": 0.0,
+      "75": 0.0,
+      "80": 0.0,
+      "85": 0.0,
+      "90": 0.0,
+      "95": 0.0,
+      "100": 0.0,
+      "105": 0.0,
+      "110": 0.0,
+      "115": 0.52,
+      "120": 1.0,
+      "125": 1.0,
+      "130": 1.0,
+      "135": 1.0,
+      "140": 1.0,
+      "145": 1.0,
+      "150": 1.0,
+      "155": 1.0,
+      "160": 1.0,
+      "165": 1.0,
+      "170": 1.0,
+      "175": 1.0,
+      "180": 1.0,
+      "185": 1.0,
+      "190": 1.0,
+      "195": 1.0,
+      "200": 1.0,
+      "205": 1.0,
+      "210": 1.0,
+      "215": 1.0,
+      "220": 1.0,
+      "225": 1.0,
+      "230": 1.0,
+      "235": 1.0
+    },
+    "breaker_events": []
+  },
+  {
+    "strategy": "gateway",
+    "interactive": {
+      "requests": 1200,
+      "succeeded": 1107,
+      "availability": 0.9225,
+      "p50_s": 0.9635163959974307,
+      "p95_s": 2.012268051999854,
+      "hedged": 34
+    },
+    "batch": {
+      "requests": 240,
+      "completed": 240,
+      "completion": 1.0,
+      "queued": 19,
+      "queued_median_wait_s": 23.81241531162985
+    },
+    "cost_usd": {
+      "total": 1.8211792000000018,
+      "hedge_losers": 0.056368000000000015,
+      "by_tenant": {
+        "acme": 1.2928717000000005,
+        "globex": 0.5283075
+      },
+      "by_feature": {
+        "chat": 0.9216545999999999,
+        "search": 0.8779883999999999,
+        "summarize": 0.0215362
+      }
+    },
+    "success_by_5s": {
+      "0": 1.0,
+      "5": 1.0,
+      "10": 1.0,
+      "15": 1.0,
+      "20": 1.0,
+      "25": 1.0,
+      "30": 1.0,
+      "35": 1.0,
+      "40": 1.0,
+      "45": 1.0,
+      "50": 1.0,
+      "55": 1.0,
+      "60": 1.0,
+      "65": 1.0,
+      "70": 1.0,
+      "75": 1.0,
+      "80": 1.0,
+      "85": 1.0,
+      "90": 1.0,
+      "95": 1.0,
+      "100": 0.0,
+      "105": 0.0,
+      "110": 0.0,
+      "115": 0.28,
+      "120": 1.0,
+      "125": 1.0,
+      "130": 1.0,
+      "135": 1.0,
+      "140": 1.0,
+      "145": 1.0,
+      "150": 1.0,
+      "155": 1.0,
+      "160": 1.0,
+      "165": 1.0,
+      "170": 1.0,
+      "175": 1.0,
+      "180": 1.0,
+      "185": 1.0,
+      "190": 1.0,
+      "195": 1.0,
+      "200": 1.0,
+      "205": 1.0,
+      "210": 1.0,
+      "215": 1.0,
+      "220": 1.0,
+      "225": 1.0,
+      "230": 1.0,
+      "235": 1.0
+    },
+    "breaker_events": [
+      {
+        "t": 61.8,
+        "provider": "alpha",
+        "from": "closed",
+        "to": "open",
+        "reason": "5 failures in a row"
+      },
+      {
+        "t": 76.9,
+        "provider": "alpha",
+        "from": "open",
+        "to": "half_open",
+        "reason": "cooldown over"
+      },
+      {
+        "t": 77.2,
+        "provider": "alpha",
+        "from": "half_open",
+        "to": "open",
+        "reason": "probe failed"
+      },
+      {
+        "t": 92.4,
+        "provider": "alpha",
+        "from": "open",
+        "to": "half_open",
+        "reason": "cooldown over"
+      },
+      {
+        "t": 92.7,
+        "provider": "alpha",
+        "from": "half_open",
+        "to": "open",
+        "reason": "probe failed"
+      },
+      {
+        "t": 101.0,
+        "provider": "gamma",
+        "from": "closed",
+        "to": "open",
+        "reason": "5 failures in a row"
+      },
+      {
+        "t": 101.0,
+        "provider": "beta",
+        "from": "closed",
+        "to": "open",
+        "reason": "5 failures in a row"
+      },
+      {
+        "t": 107.7,
+        "provider": "alpha",
+        "from": "open",
+        "to": "half_open",
+        "reason": "cooldown over"
+      },
+      {
+        "t": 108.4,
+        "provider": "alpha",
+        "from": "half_open",
+        "to": "open",
+        "reason": "probe failed"
+      },
+      {
+        "t": 116.1,
+        "provider": "gamma",
+        "from": "open",
+        "to": "half_open",
+        "reason": "cooldown over"
+      },
+      {
+        "t": 116.1,
+        "provider": "beta",
+        "from": "open",
+        "to": "half_open",
+        "reason": "cooldown over"
+      },
+      {
+        "t": 119.2,
+        "provider": "gamma",
+        "from": "half_open",
+        "to": "closed",
+        "reason": "3 probes succeeded"
+      },
+      {
+        "t": 120.4,
+        "provider": "beta",
+        "from": "half_open",
+        "to": "closed",
+        "reason": "3 probes succeeded"
+      },
+      {
+        "t": 123.6,
+        "provider": "alpha",
+        "from": "open",
+        "to": "half_open",
+        "reason": "cooldown over"
+      },
+      {
+        "t": 126.2,
+        "provider": "alpha",
+        "from": "half_open",
+        "to": "closed",
+        "reason": "3 probes succeeded"
+      },
+      {
+        "t": 155.0,
+        "provider": "alpha",
+        "from": "closed",
+        "to": "open",
+        "reason": "p95 3.11s over its 3.00s budget"
+      },
+      {
+        "t": 170.1,
+        "provider": "alpha",
+        "from": "open",
+        "to": "half_open",
+        "reason": "cooldown over"
+      },
+      {
+        "t": 175.9,
+        "provider": "alpha",
+        "from": "half_open",
+        "to": "open",
+        "reason": "probe failed"
+      },
+      {
+        "t": 190.9,
+        "provider": "alpha",
+        "from": "open",
+        "to": "half_open",
+        "reason": "cooldown over"
+      },
+      {
+        "t": 195.4,
+        "provider": "alpha",
+        "from": "half_open",
+        "to": "open",
+        "reason": "probe failed"
+      },
+      {
+        "t": 210.5,
+        "provider": "alpha",
+        "from": "open",
+        "to": "half_open",
+        "reason": "cooldown over"
+      },
+      {
+        "t": 225.9,
+        "provider": "alpha",
+        "from": "half_open",
+        "to": "closed",
+        "reason": "3 probes succeeded"
+      }
+    ]
+  }
+]

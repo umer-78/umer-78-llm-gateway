@@ -1,0 +1,354 @@
+[
+  {
+    "strategy": "direct",
+    "interactive": {
+      "requests": 1200,
+      "succeeded": 893,
+      "availability": 0.7441666666666666,
+      "p50_s": 1.097206708000158,
+      "p95_s": 7.249988703999406,
+      "hedged": 0
+    },
+    "batch": {
+      "requests": 240,
+      "completed": 224,
+      "completion": 0.9333333333333333,
+      "queued": 0,
+      "queued_median_wait_s": null
+    },
+    "cost_usd": {
+      "total": 1.7021132000000034,
+      "hedge_losers": 0,
+      "by_tenant": {
+        "acme": 1.2065154000000007,
+        "globex": 0.4955978000000001
+      },
+      "by_feature": {
+        "chat": 0.8667569999999988,
+        "search": 0.8151750000000003,
+        "summarize": 0.020181199999999996
+      }
+    },
+    "success_by_5s": {
+      "0": 1.0,
+      "5": 1.0,
+      "10": 0.92,
+      "15": 1.0,
+      "20": 1.0,
+      "25": 1.0,
+      "30": 1.0,
+      "35": 1.0,
+      "40": 0.96,
+      "45": 0.96,
+      "50": 1.0,
+      "55": 1.0,
+      "60": 0.0,
+      "65": 0.0,
+      "70": 0.0,
+      "75": 0.0,
+      "80": 0.0,
+      "85": 0.0,
+      "90": 0.0,
+      "95": 0.0,
+      "100": 0.0,
+      "105": 0.0,
+      "110": 0.0,
+      "115": 0.0,
+      "120": 1.0,
+      "125": 1.0,
+      "130": 1.0,
+      "135": 0.96,
+      "140": 1.0,
+      "145": 1.0,
+      "150": 1.0,
+      "155": 1.0,
+      "160": 1.0,
+      "165": 1.0,
+      "170": 1.0,
+      "175": 1.0,
+      "180": 1.0,
+      "185": 1.0,
+      "190": 1.0,
+      "195": 1.0,
+      "200": 0.96,
+      "205": 1.0,
+      "210": 1.0,
+      "215": 1.0,
+      "220": 0.96,
+      "225": 1.0,
+      "230": 1.0,
+      "235": 1.0
+    },
+    "breaker_events": []
+  },
+  {
+    "strategy": "client retries",
+    "interactive": {
+      "requests": 1200,
+      "succeeded": 914,
+      "availability": 0.7616666666666667,
+      "p50_s": 1.1290149039996322,
+      "p95_s": 7.221100515998842,
+      "hedged": 0
+    },
+    "batch": {
+      "requests": 240,
+      "completed": 227,
+      "completion": 0.9458333333333333,
+      "queued": 0,
+      "queued_median_wait_s": null
+    },
+    "cost_usd": {
+      "total": 1.7414188000000035,
+      "hedge_losers": 0,
+      "by_tenant": {
+        "acme": 1.2328136000000007,
+        "globex": 0.5086052000000001
+      },
+      "by_feature": {
+        "chat": 0.8854979999999988,
+        "search": 0.835491,
+        "summarize": 0.02042979999999999
+      }
+    },
+    "success_by_5s": {
+      "0": 1.0,
+      "5": 1.0,
+      "10": 1.0,
+      "15": 1.0,
+      "20": 1.0,
+      "25": 1.0,
+      "30": 1.0,
+      "35": 1.0,
+      "40": 1.0,
+      "45": 1.0,
+      "50": 1.0,
+      "55": 1.0,
+      "60": 0.0,
+      "65": 0.0,
+      "70": 0.0,
+      "75": 0.0,
+      "80": 0.0,
+      "85": 0.0,
+      "90": 0.0,
+      "95": 0.0,
+      "100": 0.0,
+      "105": 0.0,
+      "110": 0.0,
+      "115": 0.56,
+      "120": 1.0,
+      "125": 1.0,
+      "130": 1.0,
+      "135": 1.0,
+      "140": 1.0,
+      "145": 1.0,
+      "150": 1.0,
+      "155": 1.0,
+      "160": 1.0,
+      "165": 1.0,
+      "170": 1.0,
+      "175": 1.0,
+      "180": 1.0,
+      "185": 1.0,
+      "190": 1.0,
+      "195": 1.0,
+      "200": 1.0,
+      "205": 1.0,
+      "210": 1.0,
+      "215": 1.0,
+      "220": 1.0,
+      "225": 1.0,
+      "230": 1.0,
+      "235": 1.0
+    },
+    "breaker_events": []
+  },
+  {
+    "strategy": "gateway",
+    "interactive": {
+      "requests": 1200,
+      "succeeded": 1081,
+      "availability": 0.9008333333333334,
+      "p50_s": 1.1008084880013485,
+      "p95_s": 3.9476960280007916,
+      "hedged": 300
+    },
+    "batch": {
+      "requests": 240,
+      "completed": 240,
+      "completion": 1.0,
+      "queued": 25,
+      "queued_median_wait_s": 32.87850206395157
+    },
+    "cost_usd": {
+      "total": 2.3643901999999977,
+      "hedge_losers": 0.5682749999999999,
+      "by_tenant": {
+        "acme": 1.660178900000001,
+        "globex": 0.7042112999999994
+      },
+      "by_feature": {
+        "chat": 1.1839346000000008,
+        "search": 1.1063430000000003,
+        "summarize": 0.07411260000000001
+      }
+    },
+    "success_by_5s": {
+      "0": 1.0,
+      "5": 1.0,
+      "10": 1.0,
+      "15": 1.0,
+      "20": 1.0,
+      "25": 1.0,
+      "30": 1.0,
+      "35": 1.0,
+      "40": 1.0,
+      "45": 1.0,
+      "50": 1.0,
+      "55": 1.0,
+      "60": 1.0,
+      "65": 0.96,
+      "70": 1.0,
+      "75": 1.0,
+      "80": 1.0,
+      "85": 1.0,
+      "90": 1.0,
+      "95": 1.0,
+      "100": 0.0,
+      "105": 0.0,
+      "110": 0.0,
+      "115": 0.0,
+      "120": 0.28,
+      "125": 1.0,
+      "130": 1.0,
+      "135": 1.0,
+      "140": 1.0,
+      "145": 1.0,
+      "150": 1.0,
+      "155": 1.0,
+      "160": 1.0,
+      "165": 1.0,
+      "170": 1.0,
+      "175": 1.0,
+      "180": 1.0,
+      "185": 1.0,
+      "190": 1.0,
+      "195": 1.0,
+      "200": 1.0,
+      "205": 1.0,
+      "210": 1.0,
+      "215": 1.0,
+      "220": 1.0,
+      "225": 1.0,
+      "230": 1.0,
+      "235": 1.0
+    },
+    "breaker_events": [
+      {
+        "t": 59.1,
+        "provider": "gamma",
+        "from": "closed",
+        "to": "open",
+        "reason": "p95 3.4s over the 3.0s budget"
+      },
+      {
+        "t": 74.1,
+        "provider": "gamma",
+        "from": "open",
+        "to": "half_open",
+        "reason": "cooldown over"
+      },
+      {
+        "t": 75.1,
+        "provider": "alpha",
+        "from": "closed",
+        "to": "open",
+        "reason": "error rate 50% over 154 calls"
+      },
+      {
+        "t": 90.2,
+        "provider": "alpha",
+        "from": "open",
+        "to": "half_open",
+        "reason": "cooldown over"
+      },
+      {
+        "t": 91.7,
+        "provider": "alpha",
+        "from": "half_open",
+        "to": "open",
+        "reason": "probe failed"
+      },
+      {
+        "t": 101.5,
+        "provider": "gamma",
+        "from": "half_open",
+        "to": "open",
+        "reason": "probe failed"
+      },
+      {
+        "t": 106.9,
+        "provider": "alpha",
+        "from": "open",
+        "to": "half_open",
+        "reason": "cooldown over"
+      },
+      {
+        "t": 107.2,
+        "provider": "alpha",
+        "from": "half_open",
+        "to": "open",
+        "reason": "probe failed"
+      },
+      {
+        "t": 112.4,
+        "provider": "beta",
+        "from": "closed",
+        "to": "open",
+        "reason": "error rate 50% over 223 calls"
+      },
+      {
+        "t": 116.6,
+        "provider": "gamma",
+        "from": "open",
+        "to": "half_open",
+        "reason": "cooldown over"
+      },
+      {
+        "t": 122.4,
+        "provider": "alpha",
+        "from": "open",
+        "to": "half_open",
+        "reason": "cooldown over"
+      },
+      {
+        "t": 124.1,
+        "provider": "gamma",
+        "from": "half_open",
+        "to": "closed",
+        "reason": "3 probes succeeded"
+      },
+      {
+        "t": 124.7,
+        "provider": "alpha",
+        "from": "half_open",
+        "to": "closed",
+        "reason": "3 probes succeeded"
+      },
+      {
+        "t": 127.4,
+        "provider": "beta",
+        "from": "open",
+        "to": "half_open",
+        "reason": "cooldown over"
+      },
+      {
+        "t": 156.4,
+        "provider": "beta",
+        "from": "half_open",
+        "to": "closed",
+        "reason": "3 probes succeeded"
+      }
+    ]
+  }
+]

@@ -1,0 +1,34 @@
+| Setup | Interactive availability | p50 | p95 | Batch completed | Spend |
+|---|---:|---:|---:|---:|---:|
+| direct | **74.4%** (893/1200) | 1.11 s | 7.25 s | 93.3% (224/240) | $1.70 |
+| client retries | **76.1%** (913/1200) | 1.13 s | 7.24 s | 94.6% (227/240) | $1.74 |
+| gateway | **92.2%** (1107/1200) | 0.96 s | 2.01 s | 100.0% (240/240) | $1.82 |
+
+Gateway breaker events:
+  t=  61.8s  alpha     closed -> open      5 failures in a row
+  t=  76.9s  alpha       open -> half_open cooldown over
+  t=  77.2s  alpha  half_open -> open      probe failed
+  t=  92.4s  alpha       open -> half_open cooldown over
+  t=  92.7s  alpha  half_open -> open      probe failed
+  t= 101.0s  gamma     closed -> open      5 failures in a row
+  t= 101.0s  beta      closed -> open      5 failures in a row
+  t= 107.7s  alpha       open -> half_open cooldown over
+  t= 108.4s  alpha  half_open -> open      probe failed
+  t= 116.1s  gamma       open -> half_open cooldown over
+  t= 116.1s  beta        open -> half_open cooldown over
+  t= 119.2s  gamma  half_open -> closed    3 probes succeeded
+  t= 120.4s  beta   half_open -> closed    3 probes succeeded
+  t= 123.6s  alpha       open -> half_open cooldown over
+  t= 126.2s  alpha  half_open -> closed    3 probes succeeded
+  t= 155.0s  alpha     closed -> open      p95 3.11s over its 3.00s budget
+  t= 170.1s  alpha       open -> half_open cooldown over
+  t= 175.9s  alpha  half_open -> open      probe failed
+  t= 190.9s  alpha       open -> half_open cooldown over
+  t= 195.4s  alpha  half_open -> open      probe failed
+  t= 210.5s  alpha       open -> half_open cooldown over
+  t= 225.9s  alpha  half_open -> closed    3 probes succeeded
+
+alpha outage at 60 s: opened after 1.8 s; closed 6.2 s after it recovered at 120 s
+alpha slow from 150 s: opened after 5.0 s
+hedged interactive requests: 34; spend on cancelled hedge legs $0.06 of $1.82
+CHECK passed
