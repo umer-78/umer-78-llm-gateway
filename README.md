@@ -76,10 +76,10 @@ flowchart LR
    provider after 2.5 s and cancels the loser. The cancelled leg is counted as if it had been
    billed in full, because a provider may bill a request the client stopped waiting for; the
    cost line above is that worst case.
-3. **One OpenAI-compatible adapter instead of LiteLLM.** OpenAI, Anthropic's compatibility
-   endpoint, Ollama and vLLM all accept the same `/chat/completions` request, so a 40-line httpx
-   adapter covers the three providers this needs. What it gives up is LiteLLM's handling of each
-   vendor's quirks, which a larger provider list would want.
+3. **One OpenAI-compatible adapter instead of LiteLLM.** OpenAI, Groq, Ollama and vLLM all accept
+   the same `/chat/completions` request, so a 40-line httpx adapter covers the three providers this
+   needs. What it gives up is LiteLLM's handling of each vendor's quirks, which a larger provider
+   list would want.
 
 ## What did not work
 

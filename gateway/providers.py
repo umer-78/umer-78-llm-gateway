@@ -1,6 +1,6 @@
 """Model providers behind one interface.
 
-OpenAI, Anthropic (through its OpenAI-compatible endpoint), Ollama and vLLM all
+OpenAI, Groq, Ollama and vLLM all
 accept the same /v1/chat/completions request, so one small HTTP adapter covers
 all of them. MockProvider stands in for a model in tests and in the chaos
 benchmark; Chaos wraps any provider to inject failures and latency on demand.
