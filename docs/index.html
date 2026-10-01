@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" data-scene="router">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LLM Gateway · Umer Hashmi</title>
+  <meta name="description" content="A self-healing LLM gateway that answered 92.2% of interactive requests through four minutes of scripted provider outages, against 74.4% calling one provider directly — replayed here second by second from the real benchmark.">
+  <meta name="theme-color" content="#047857">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Umer Hashmi · projects">
+  <meta property="og:title" content="LLM Gateway · Umer Hashmi">
+  <meta property="og:description" content="92.2% of interactive requests answered through four minutes of provider outages, against 74.4% direct — circuit breakers, hedging and a queue, replayed from the benchmark.">
+  <meta property="og:url" content="https://umer-78.github.io/umer-78-llm-gateway/">
+  <meta property="og:image" content="https://umer-78.github.io/umer-78-llm-gateway/og.jpg">
+  <meta property="og:image:alt" content="LLM Gateway: interactive success rate through scripted outages">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="kit.css">
+  <link rel="stylesheet" href="fx.css">
+  <style>:root { --accent: #047857; --fx-2: #0ea5e9; --fx-3: #f59e0b; --on-accent: #fff; } @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --accent: #34d399; --on-accent: #06281d; } }</style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="fx-nav" aria-label="On this page"><a class="fx-home" href="https://umer-78.github.io/">← All projects</a><a class="fx-gh" href="https://github.com/umer-78/umer-78-llm-gateway">GitHub</a></nav>
+    <header class="fx-hero">
+      <span class="fx-eyebrow">LLM infrastructure · Python</span>
+      <h1>LLM Gateway</h1>
+      <p class="lede">One OpenAI-compatible endpoint in front of several model providers. Each provider gets a circuit breaker fed by a rolling health window; open breakers are skipped, half-open ones are probed until they recover on their own. Latency-sensitive requests are hedged, deferrable ones are queued through an outage. Below is the real benchmark &mdash; the same 1,440 requests sent three ways while providers fail on a schedule &mdash; replayed second by second.</p>
+      <div class="links"><a class="btn primary" href="#timeline">Watch it survive an outage</a><a class="btn" href="https://github.com/umer-78/umer-78-llm-gateway">Code and method</a></div>
+      <div class="fx-tags" aria-hidden="true"><div><span>python</span><span>fastapi</span><span>redis</span><span>circuit breaker</span><span>failover</span><span>hedging</span><span>python</span><span>fastapi</span><span>redis</span><span>circuit breaker</span><span>failover</span><span>hedging</span></div></div>
+    </header>
+    <main>
+      <section class="kpis" id="kpis"></section>
+
+      <section class="card" id="compare">
+        <h2>Three ways to survive an outage</h2>
+        <p class="sub">The same 1,440 requests (5/s interactive, 1/s batch, two tenants, three features) sent through three setups while providers fail on a schedule. Pick a metric to compare; the gateway row is highlighted throughout.</p>
+        <div class="controls"><label>Compare by</label><div id="metricSel"></div></div>
+        <div id="cmpBars"></div>
+        <div id="cmpTable"></div>
+      </section>
+
+      <section class="card" id="timeline">
+        <h2>Answered requests, every 5 seconds</h2>
+        <p class="sub">Share of interactive requests answered in each 5-second window. The scripted outages are shaded: <b>alpha returns 503s</b> from 60&ndash;120&thinsp;s, <b>every provider is down</b> from 100&ndash;115&thinsp;s, and <b>alpha turns 6&thinsp;s slower</b> from 150&ndash;210&thinsp;s. Watch the direct and retry lines fall into each window while the gateway fails over and stays up.</p>
+        <div class="controls"><label for="tlSel">Show</label><select id="tlSel"></select></div>
+        <div id="tlChart"></div>
+        <div id="tlKey"></div>
+      </section>
+
+      <section class="card" id="breakers">
+        <h2>How the breaker reacted</h2>
+        <p class="sub">Every state change the gateway made on its own, with no one touching it. A breaker opens after repeated failures or a blown latency budget, waits out a cooldown, then probes with a trickle of traffic before trusting a provider again.</p>
+        <div class="readout" id="brStats"></div>
+        <div class="controls"><label>Provider</label><div id="brSel"></div></div>
+        <div id="brTable"></div>
+      </section>
+
+      <section class="card" id="cost">
+        <h2>What it cost</h2>
+        <p class="sub">Staying up is not free: failover sends some traffic to a pricier provider, and hedged requests pay for a second call that sometimes loses. The gateway spent $1.82 against $1.70 for the direct call &mdash; up 7% &mdash; and every dollar is attributed to a tenant and a feature.</p>
+        <div class="controls"><label for="costSel">Break spend down by</label><select id="costSel"></select></div>
+        <div id="costBars"></div>
+        <div class="readout" id="costNote"></div>
+      </section>
+
+      <section class="card" id="how">
+        <h2>How it works</h2>
+        <div class="prose">
+          <p>Requests come in on <code>POST /v1/chat/completions</code>, the same shape as the OpenAI API. A router picks a provider by request class: <b>interactive</b> work is answered now and hedged once if the first provider is slow; <b>batch</b> work is deferrable, so it is queued through an outage and drained when capacity returns.</p>
+          <p>Each provider carries a <b>circuit breaker</b> fed by a rolling health window in Redis, shared across every gateway replica. Five failures in a row, or a p95 latency over its budget, trips the breaker <b>open</b> and traffic skips that provider. After a cooldown the breaker goes <b>half-open</b> and a few probe requests test the water; three clean probes close it again. All of this is automatic &mdash; the state changes in the table above were made by the gateway, not by a human.</p>
+          <p class="note">The providers here are simulated, failing on a fixed schedule so the recovery logic can be measured repeatably. The numbers measure the gateway's behaviour, not any model's quality or any vendor's real uptime. Reproduce the run with <code>python -m bench.chaos --fake-redis</code> (about four minutes). The raw output is <a href="bench-v2.txt">bench-v2.txt</a> / <a href="bench-v2.json">bench-v2.json</a>.</p>
+        </div>
+      </section>
+    </main>
+    <footer>Built by <a href="https://github.com/umer-78">Umer Hashmi</a> · Benchmark: 1,440 requests through scripted provider outages, simulated providers · <a href="data.json" download>Download the data behind this page</a></footer>
+  </div>
+  <script type="module" src="app.js"></script>
+  <script type="module" src="fx.js"></script>
+</body>
+</html>
