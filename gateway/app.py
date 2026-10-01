@@ -17,6 +17,7 @@ from .breaker import STATE_CODE, Breakers
 from .clock import Clock
 from .config import Config
 from .health import HealthTracker
+from .limiter import RateLimiter
 from .metrics import Metrics
 from .providers import Chaos, MockProvider, OpenAICompatProvider
 from .queue import JobQueue
@@ -72,6 +73,7 @@ def create_app(cfg: Config, *, redis=None, clock: Clock | None = None, providers
     budgets = {p["name"]: p["latency_budget_s"] for p in cfg.providers if "latency_budget_s" in p}
     breakers = Breakers(redis, clock, health, cfg.breaker, cfg.redis_prefix, on_change, budgets)
     router = Router(providers, cfg.classes, breakers, health, metrics, clock, cfg.resilience, rng)
+    limiter = RateLimiter(redis, clock, cfg.rate_limit, cfg.redis_prefix)
 
     def attribute(meta: dict, out: Outcome) -> None:
         """Every attempt's spend, hedge losers included, lands on the tenant and feature that caused it."""
@@ -97,7 +99,7 @@ def create_app(cfg: Config, *, redis=None, clock: Clock | None = None, providers
 
     app = FastAPI(title="llm-gateway", lifespan=lifespan)
     app.state.gw = SimpleNamespace(cfg=cfg, redis=redis, clock=clock, metrics=metrics, providers=providers,
-                                   health=health, breakers=breakers, router=router, queue=queue, events=events)
+                                   health=health, breakers=breakers, router=router, queue=queue, events=events, limiter=limiter)
 
     @app.post("/v1/chat/completions")
     async def chat(request: Request,
@@ -111,6 +113,11 @@ def create_app(cfg: Config, *, redis=None, clock: Clock | None = None, providers
         class_name = x_request_class or cfg.default_class
         if class_name not in cfg.classes:
             return error(400, f"unknown request class {class_name!r}; configured: {', '.join(cfg.classes)}", "invalid_request_error")
+        ok, retry_after = await limiter.check(x_tenant, x_feature)
+        if not ok:
+            metrics.responses.labels(class_name, "429").inc()
+            return error(429, f"rate limit exceeded for tenant {x_tenant!r}; retry in {retry_after:.1f}s",
+                         "rate_limit", headers={"Retry-After": str(max(1, round(retry_after)))})
         try:
             body = await request.json()
         except (ValueError, UnicodeDecodeError):

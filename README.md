@@ -66,6 +66,11 @@ flowchart LR
 - **Cost attribution**: every request must name its tenant, feature and request id, and every
   attempt's spend, including hedge legs that lost, is counted against them
   (`llm_gateway_cost_usd_total{tenant,feature,provider}`).
+- **Per-tenant rate limiting** (off by default): each tenant gets a token bucket in Redis that
+  refills at `rate_per_s` up to `burst`. A request with no token free is refused with a 429 and a
+  `Retry-After`. The bucket is read-modify-written inside a WATCH transaction, so replicas sharing
+  a limit cannot overspend. Set `per_feature: true` to meter each tenant+feature pair on its own.
+  Configure it under `rate_limit:` in `config.yaml`.
 
 ## Design decisions
 

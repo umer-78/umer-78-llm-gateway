@@ -78,3 +78,12 @@ queue:
 #    kind: openai_compat
 #    base_url: http://ollama:11434/v1
 #    model: llama3.1:8b
+
+# Per-tenant rate limiting (off by default). When enabled, each tenant gets a
+# token bucket: `rate_per_s` tokens refill per second up to `burst`. Set
+# per_feature: true to limit each tenant+feature pair separately.
+rate_limit:
+  enabled: false
+  rate_per_s: 10
+  burst: 20
+  per_feature: false

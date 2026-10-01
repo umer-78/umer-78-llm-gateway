@@ -4,6 +4,7 @@ from dataclasses import dataclass, field
 import yaml
 
 from .breaker import BreakerConfig
+from .limiter import RateLimitConfig
 
 
 @dataclass
@@ -43,6 +44,7 @@ class Config:
     queue: QueueConfig = field(default_factory=QueueConfig)
     idempotency_ttl_s: int = 86400
     redis_prefix: str = "gw"
+    rate_limit: RateLimitConfig = field(default_factory=RateLimitConfig)
 
     def __post_init__(self):
         names = {p["name"] for p in self.providers}
@@ -67,4 +69,5 @@ def load_config(path: str) -> Config:
         queue=QueueConfig(**raw.get("queue", {})),
         idempotency_ttl_s=raw.get("idempotency_ttl_s", 86400),
         redis_prefix=raw.get("redis_prefix", "gw"),
+        rate_limit=RateLimitConfig(**raw.get("rate_limit", {})),
     )
