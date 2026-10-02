@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LLM Gateway — pricing &amp; support</title>
+  <meta name="description" content="The LLM Gateway is open source and free to self-host. The Production Pack gets you a hardened deployment, provider onboarding, a runbook and priority support — done for you.">
+  <meta name="theme-color" content="#047857">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="LLM Gateway — pricing & support">
+  <meta property="og:description" content="Free to self-host (MIT). The Production Pack is the done-for-you deployment and priority support.">
+  <meta property="og:url" content="https://umer-78.github.io/umer-78-llm-gateway/pricing.html">
+  <meta property="og:image" content="https://umer-78.github.io/umer-78-llm-gateway/og.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <style>
+    /* ===== SET THIS: your Gumroad / Lemon Squeezy product links ===== */
+    /* Replace the two href="#buy-..." below with your real checkout URLs. */
+    :root {
+      --bg: #f6f5f1; --surface: #fffefb; --surface-2: #eef0ea; --line: #e2e1d6; --ink: #15201b; --muted: #5d665f;
+      --accent: #047857; --accent-ink: #fff; --accent-soft: #e7f3ee; --gold: #b45309;
+      --font: 'Inter', system-ui, sans-serif;
+    }
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+      --bg: #0c110e; --surface: #141a16; --surface-2: #1b231e; --line: #2a332c; --ink: #eef2ee; --muted: #a2ada5;
+      --accent: #34d399; --accent-ink: #05211a; --accent-soft: rgb(52 211 153 / .12); --gold: #fbbf24; color-scheme: dark; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--font); -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 14px; font-weight: 600; }
+    nav a { color: var(--muted); text-decoration: none; margin-left: 18px; }
+    nav a:hover { color: var(--ink); }
+    nav .home { margin-left: 0; }
+    header.hero { padding: clamp(40px, 6vw, 72px) 0 36px; text-align: center; }
+    .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 0 0 14px; }
+    h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.08; margin: 0 0 16px; letter-spacing: -0.02em; }
+    .lede { max-width: 56ch; margin: 0 auto; color: var(--muted); font-size: 18px; }
+    .tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 30px 0 10px; }
+    @media (max-width: 760px) { .tiers { grid-template-columns: 1fr; } }
+    .tier { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 28px; display: flex; flex-direction: column; }
+    .tier.feature { border-color: var(--accent); box-shadow: 0 1px 0 var(--accent) inset, 0 0 0 1px var(--accent); }
+    .tier h2 { font-size: 20px; margin: 0 0 4px; }
+    .tier .who { color: var(--muted); font-size: 14px; margin: 0 0 18px; }
+    .price { font-size: 38px; font-weight: 800; letter-spacing: -0.02em; }
+    .price small { font-size: 15px; font-weight: 500; color: var(--muted); }
+    ul.feat { list-style: none; padding: 0; margin: 20px 0 24px; display: grid; gap: 10px; }
+    ul.feat li { padding-left: 26px; position: relative; font-size: 15px; }
+    ul.feat li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+    ul.feat li.no { color: var(--muted); }
+    ul.feat li.no::before { content: "–"; color: var(--muted); }
+    .cta { margin-top: auto; }
+    .btn { display: block; text-align: center; font-weight: 700; font-size: 15px; padding: 13px 18px; border-radius: 10px; text-decoration: none; }
+    .btn.solid { background: var(--accent); color: var(--accent-ink); }
+    .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+    .btn.solid:hover { filter: brightness(1.05); }
+    .note { max-width: 62ch; margin: 22px auto 0; text-align: center; color: var(--muted); font-size: 14px; }
+    .proof { background: var(--accent-soft); border: 1px solid var(--line); border-radius: 14px; padding: 18px 22px; margin: 30px 0; text-align: center; font-size: 15px; }
+    .proof b { color: var(--ink); }
+    section.faq { padding: 20px 0 60px; }
+    section.faq h2 { text-align: center; font-size: 24px; margin: 30px 0 18px; }
+    details { border-bottom: 1px solid var(--line); padding: 14px 2px; max-width: 70ch; margin: 0 auto; }
+    summary { font-weight: 600; cursor: pointer; }
+    details p { color: var(--muted); margin: 10px 0 2px; }
+    footer { border-top: 1px solid var(--line); padding: 22px 0 40px; color: var(--muted); font-size: 14px; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav>
+      <a class="home" href="https://umer-78.github.io/">← All projects</a>
+      <span>
+        <a href="index.html">Live demo</a>
+        <a href="https://github.com/umer-78/umer-78-llm-gateway">GitHub</a>
+      </span>
+    </nav>
+    <header class="hero">
+      <p class="eyebrow">Pricing &amp; support</p>
+      <h1>Run it in production, without the setup.</h1>
+      <p class="lede">The gateway is open source and free to self-host. The Production Pack is the done-for-you deployment — hardened config, dashboards, a runbook and a person to email when something breaks.</p>
+    </header>
+
+    <div class="proof">Through four minutes of scripted provider outages it answered <b>92.2%</b> of interactive requests, against <b>74.4%</b> calling one provider directly, and finished <b>100%</b> of deferrable work — <a href="index.html">see the benchmark</a>.</div>
+
+    <div class="tiers">
+      <div class="tier">
+        <h2>Self-host</h2>
+        <p class="who">For engineers who want to run it themselves.</p>
+        <div class="price">Free <small>— MIT licensed</small></div>
+        <ul class="feat">
+          <li>The full gateway: breakers, failover, hedging, queue</li>
+          <li>Docker Compose, Prometheus &amp; a Grafana board</li>
+          <li>The chaos benchmark to reproduce the numbers</li>
+          <li>Use it commercially — MIT, no strings</li>
+          <li class="no">Setup and tuning are on you</li>
+          <li class="no">No support channel</li>
+        </ul>
+        <div class="cta"><a class="btn ghost" href="https://github.com/umer-78/umer-78-llm-gateway">Get it on GitHub</a></div>
+      </div>
+
+      <div class="tier feature">
+        <h2>Production Pack</h2>
+        <p class="who">For teams putting it in front of real traffic.</p>
+        <div class="price">$149 <small>one-time</small></div>
+        <ul class="feat">
+          <li>Everything in Self-host</li>
+          <li>A hardened production compose + env, ready to deploy</li>
+          <li>Provider onboarding: wire your real providers &amp; keys safely</li>
+          <li>A step-by-step production runbook (scaling, alerts, recovery)</li>
+          <li>Pre-built Grafana alerts for breaker trips and spend</li>
+          <li>30 days of priority email support</li>
+        </ul>
+        <!-- SET THIS: replace with your Gumroad / Lemon Squeezy product URL -->
+        <div class="cta"><a class="btn solid" href="https://gumroad.com/l/YOUR-PRODUCT" rel="noopener">Get the Production Pack</a></div>
+      </div>
+    </div>
+
+    <p class="note">Need ongoing help? A <b>support retainer</b> is available at $49/month for priority email support and upgrade guidance — <a href="mailto:YOUR-EMAIL@example.com?subject=LLM%20Gateway%20support%20retainer">ask about it</a>.</p>
+
+    <section class="faq">
+      <h2>Questions</h2>
+      <details><summary>Isn't the code free? What am I paying for?</summary><p>Yes — the gateway is MIT-licensed and free to self-host forever. The Production Pack is the <em>work around</em> the code: a hardened deployment, provider and secret wiring done safely, alerting that catches breaker trips and runaway spend, a runbook, and a month of support. You pay to skip the setup and have someone to ask.</p></details>
+      <details><summary>What do I actually receive?</summary><p>A private repository (or archive) with the production compose and env templates, the Grafana alert rules, and the runbook, plus an email thread for your 30 days of support. Delivered after checkout.</p></details>
+      <details><summary>Can I use the gateway in a commercial product?</summary><p>Yes. The MIT licence already permits commercial use with no fee. The Production Pack is optional — it just saves you the deployment work.</p></details>
+      <details><summary>Do you offer a hosted version?</summary><p>Not yet. The gateway is built to run on your own infrastructure next to your providers, which is usually what teams want for latency and key handling. A hosted option may come later.</p></details>
+    </section>
+  </div>
+  <footer>Built by <a href="https://github.com/umer-78">Umer Hashmi</a> · The gateway is open source (MIT) · <a href="index.html">Live demo</a> · <a href="https://github.com/umer-78/umer-78-llm-gateway">Source</a></footer>
+</body>
+</html>
