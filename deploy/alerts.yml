@@ -1,0 +1,75 @@
+# Prometheus alerting rules for the LLM Gateway.
+# Loaded via rule_files in prometheus.yml. Thresholds are starting points — tune them to your
+# traffic and SLOs. Every expression uses the gateway's real exported metrics (gateway/metrics.py).
+groups:
+  - name: llm-gateway
+    rules:
+      - alert: GatewayDown
+        expr: up{job="llm-gateway"} == 0
+        for: 1m
+        labels: { severity: critical }
+        annotations:
+          summary: "LLM Gateway is not being scraped"
+          description: "Prometheus cannot reach the gateway target for 1 minute. Check the container and /metrics."
+
+      - alert: ProviderBreakerOpen
+        expr: llm_gateway_breaker_state == 2
+        for: 2m
+        labels: { severity: warning }
+        annotations:
+          summary: "Breaker open for {{ $labels.provider }}"
+          description: "{{ $labels.provider }}'s circuit breaker has been open for 2m; its traffic is failing over to other providers."
+
+      - alert: AllProvidersBreakersOpen
+        expr: min(llm_gateway_breaker_state) == 2
+        for: 1m
+        labels: { severity: critical }
+        annotations:
+          summary: "Every provider breaker is open"
+          description: "All providers are tripped — interactive requests cannot be served. Check provider health and keys immediately."
+
+      - alert: HighServerErrorRate
+        expr: |
+          sum(rate(llm_gateway_responses{status=~"5.."}[5m]))
+            / clamp_min(sum(rate(llm_gateway_responses[5m])), 1) > 0.10
+        for: 5m
+        labels: { severity: critical }
+        annotations:
+          summary: "Over 10% of responses are 5xx"
+          description: "The gateway is returning server errors on more than 10% of responses over 5m."
+
+      - alert: RateLimitingHeavy
+        expr: |
+          sum(rate(llm_gateway_responses{status="429"}[5m]))
+            / clamp_min(sum(rate(llm_gateway_responses[5m])), 1) > 0.20
+        for: 10m
+        labels: { severity: warning }
+        annotations:
+          summary: "Over 20% of responses are 429 (rate limited)"
+          description: "A large share of callers are being rate limited; consider raising limits or capacity."
+
+      - alert: ProviderLatencyP95High
+        expr: |
+          histogram_quantile(0.95,
+            sum by (le, provider) (rate(llm_gateway_provider_latency_seconds_bucket[5m]))) > 5
+        for: 10m
+        labels: { severity: warning }
+        annotations:
+          summary: "p95 latency over 5s for {{ $labels.provider }}"
+          description: "{{ $labels.provider }} p95 latency has been above 5s for 10m. The latency breaker may trip."
+
+      - alert: DeferredQueueBacklog
+        expr: llm_gateway_queue_depth > 100
+        for: 10m
+        labels: { severity: warning }
+        annotations:
+          summary: "Deferred queue backlog above 100"
+          description: "{{ $value }} batch requests are waiting. The queue is not draining — check capacity and provider health."
+
+      - alert: SpendRateHigh
+        expr: sum(rate(llm_gateway_cost_usd[1h])) * 3600 > 50
+        for: 15m
+        labels: { severity: warning }
+        annotations:
+          summary: "Spend above $50/hour"
+          description: "Attributed spend is running over $50/hour ({{ $value | printf \"%.2f\" }}). Check for a runaway tenant or feature."

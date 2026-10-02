@@ -79,7 +79,7 @@
     <header class="hero">
       <p class="eyebrow">Pricing &amp; support</p>
       <h1>Run it in production, without the setup.</h1>
-      <p class="lede">The gateway is open source and free to self-host. The Production Pack is the done-for-you deployment — hardened config, dashboards, a runbook and a person to email when something breaks.</p>
+      <p class="lede">The gateway is open source and free to self-host — production Compose, alert rules and a runbook included. The paid option is done-for-you: I deploy it on your infrastructure, tune it to your traffic, and stay on email when something breaks.</p>
     </header>
 
     <div class="proof">Through four minutes of scripted provider outages it answered <b>92.2%</b> of interactive requests, against <b>74.4%</b> calling one provider directly, and finished <b>100%</b> of deferrable work — <a href="index.html">see the benchmark</a>.</div>
@@ -91,26 +91,27 @@
         <div class="price">Free <small>— MIT licensed</small></div>
         <ul class="feat">
           <li>The full gateway: breakers, failover, hedging, queue</li>
-          <li>Docker Compose, Prometheus &amp; a Grafana board</li>
+          <li>Production Compose, Prometheus alert rules &amp; a Grafana board</li>
+          <li>A production runbook (deploy, scale, monitor, recover)</li>
           <li>The chaos benchmark to reproduce the numbers</li>
           <li>Use it commercially — MIT, no strings</li>
-          <li class="no">Setup and tuning are on you</li>
+          <li class="no">You run the deployment and tuning</li>
           <li class="no">No support channel</li>
         </ul>
         <div class="cta"><a class="btn ghost" href="https://github.com/umer-78/umer-78-llm-gateway">Get it on GitHub</a></div>
       </div>
 
       <div class="tier feature">
-        <h2>Production Pack</h2>
-        <p class="who">For teams putting it in front of real traffic.</p>
+        <h2>Done-for-you setup</h2>
+        <p class="who">For teams who want it live without the ops work.</p>
         <div class="price">$149 <small>one-time</small></div>
         <ul class="feat">
-          <li>Everything in Self-host</li>
-          <li>A hardened production compose + env, ready to deploy</li>
-          <li>Provider onboarding: wire your real providers &amp; keys safely</li>
-          <li>A step-by-step production runbook (scaling, alerts, recovery)</li>
-          <li>Pre-built Grafana alerts for breaker trips and spend</li>
-          <li>30 days of priority email support</li>
+          <li>Everything in Self-host (all the code and docs)</li>
+          <li>I deploy it on your infrastructure with you</li>
+          <li>Your real providers, keys and secrets wired safely</li>
+          <li>Breaker budgets and rate limits tuned to your traffic</li>
+          <li>Grafana alerts routed to your Slack or email</li>
+          <li>A 1:1 handover call + 30 days of priority support</li>
         </ul>
         <!-- SET THIS: replace with your Gumroad / Lemon Squeezy product URL -->
         <div class="cta"><a class="btn solid" href="https://gumroad.com/l/YOUR-PRODUCT" rel="noopener">Get the Production Pack</a></div>
@@ -121,9 +122,9 @@
 
     <section class="faq">
       <h2>Questions</h2>
-      <details><summary>Isn't the code free? What am I paying for?</summary><p>Yes — the gateway is MIT-licensed and free to self-host forever. The Production Pack is the <em>work around</em> the code: a hardened deployment, provider and secret wiring done safely, alerting that catches breaker trips and runaway spend, a runbook, and a month of support. You pay to skip the setup and have someone to ask.</p></details>
-      <details><summary>What do I actually receive?</summary><p>A private repository (or archive) with the production compose and env templates, the Grafana alert rules, and the runbook, plus an email thread for your 30 days of support. Delivered after checkout.</p></details>
-      <details><summary>Can I use the gateway in a commercial product?</summary><p>Yes. The MIT licence already permits commercial use with no fee. The Production Pack is optional — it just saves you the deployment work.</p></details>
+      <details><summary>Isn't the code free? What am I paying for?</summary><p>Yes — the gateway is MIT-licensed and free to self-host forever, and so are the production Compose, the alert rules and the runbook (they're in the repo). You're paying for <em>time and a person</em>: I deploy it on your infrastructure, wire your providers and secrets safely, tune the breaker budgets and rate limits to your traffic, route the alerts to your Slack, and stay on email for 30 days. You skip the ops work and have someone to ask.</p></details>
+      <details><summary>What actually happens after I buy?</summary><p>We book a call, I deploy the gateway on your infrastructure with you, configure your providers and secrets, tune it to your traffic, and route the alerts where your team will see them. Then you have 30 days of priority email support. Everything I use is in the open-source repo — you keep all of it.</p></details>
+      <details><summary>Can I use the gateway in a commercial product?</summary><p>Yes. The MIT licence already permits commercial use with no fee. The setup service is optional — it just saves you the ops work.</p></details>
       <details><summary>Do you offer a hosted version?</summary><p>Not yet. The gateway is built to run on your own infrastructure next to your providers, which is usually what teams want for latency and key handling. A hosted option may come later.</p></details>
     </section>
   </div>

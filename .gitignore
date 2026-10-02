@@ -4,3 +4,7 @@ __pycache__/
 .pytest_cache/
 bench/out/
 *.egg-info/
+
+# production secrets
+deploy/.env.prod
+.env.prod

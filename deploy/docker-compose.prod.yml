@@ -1,0 +1,76 @@
+# Production Compose for the LLM Gateway.
+#
+# Hardened for real traffic, in contrast to the repo-root docker-compose.yml (which is for the
+# demo/benchmark): restart policies, resource limits, Redis persistence, secrets from a .env file,
+# Prometheus alert rules loaded, Grafana login required, and only the gateway port published (put
+# it behind your own TLS-terminating reverse proxy). See docs/PRODUCTION.md.
+#
+#   cp .env.prod.example .env.prod   # then fill in secrets
+#   docker compose -f deploy/docker-compose.prod.yml --env-file .env.prod up -d
+name: llm-gateway
+
+services:
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes", "--save", "60", "1000"]
+    restart: unless-stopped
+    volumes: ["redis-data:/data"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    deploy:
+      resources:
+        limits: { cpus: "1.0", memory: 512M }
+
+  gateway:
+    build: { context: .. }
+    image: llm-gateway:latest
+    restart: unless-stopped
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      GATEWAY_ADMIN_TOKEN: ${GATEWAY_ADMIN_TOKEN:?set GATEWAY_ADMIN_TOKEN in .env.prod}
+    env_file: [.env.prod]           # provider keys and any overrides live here, never in the image
+    # Published only on loopback: terminate TLS and authenticate at your reverse proxy.
+    ports: ["127.0.0.1:8000:8000"]
+    depends_on:
+      redis: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8000/health').status==200 else 1)"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    deploy:
+      resources:
+        limits: { cpus: "2.0", memory: 1G }
+
+  prometheus:
+    image: prom/prometheus:v2.53.0
+    restart: unless-stopped
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./alerts.yml:/etc/prometheus/alerts.yml:ro
+      - prometheus-data:/prometheus
+    ports: ["127.0.0.1:9090:9090"]
+    depends_on: [gateway]
+
+  grafana:
+    image: grafana/grafana:11.1.0
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:?set GRAFANA_ADMIN_PASSWORD in .env.prod}
+      GF_AUTH_ANONYMOUS_ENABLED: "false"
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - grafana-data:/var/lib/grafana
+    ports: ["127.0.0.1:3000:3000"]
+    depends_on: [prometheus]
+
+volumes:
+  redis-data:
+  prometheus-data:
+  grafana-data:
