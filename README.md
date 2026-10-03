@@ -147,6 +147,21 @@ Admin endpoints need `Authorization: Bearer $GATEWAY_ADMIN_TOKEN` and are off wh
 `Idempotency-Key` makes a retried call replay the first answer instead of paying twice. To use
 real models, switch providers to `kind: openai_compat` in [`config.yaml`](config.yaml).
 
+## Run it in production
+
+The compose above is for the demo and benchmark. For a real deployment use the hardened
+stack and the runbook:
+
+```bash
+cp deploy/.env.prod.example deploy/.env.prod     # then fill in the admin token, Grafana password and provider keys
+docker compose -f deploy/docker-compose.prod.yml --env-file deploy/.env.prod up -d --build
+```
+
+[`docs/PRODUCTION.md`](docs/PRODUCTION.md) is the full runbook — deploy, configure providers and
+secrets, scale behind a reverse proxy, the Prometheus alert rules in [`deploy/alerts.yml`](deploy/alerts.yml),
+and how to recover and upgrade. The gateway is MIT-licensed and free to self-host; a done-for-you
+setup and support option is on the [pricing page](https://umer-78.github.io/umer-78-llm-gateway/pricing.html).
+
 ## Tests
 
 ```bash
